@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const RegisterSchema = z.object({
-  email: z.email('Invalid email.'),
+  email: z.string().email('Invalid email.'),
   password: z
     .string()
     .min(6, 'Invalid password. Min 6 characters.')
@@ -10,7 +10,7 @@ export const RegisterSchema = z.object({
 });
 
 export const LoginSchema = z.object({
-  email: z.email('Invalid email.'),
+  email: z.string().email('Invalid email.'),
   password: z.string().min(1, 'Password required.'),
 });
 

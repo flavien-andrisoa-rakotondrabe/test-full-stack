@@ -1,29 +1,33 @@
-import { ObjectId } from 'mongoose';
 import { z } from 'zod';
 
-export interface CandidateInterface {
-  _id: ObjectId;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  isValidated: boolean;
-  deletedAt: Date | null;
-
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export type CreateCandidateDto = Pick<
-  CandidateInterface,
-  'firstName' | 'lastName' | 'email' | 'phone'
->;
-
 export const CandidateSchemaZod = z.object({
-  firstName: z.string().min(2, 'Invalid firstName. Min 2 characters.'),
-  lastName: z.string().min(2, 'Invalid lastName. Min 2 characters.'),
-  email: z.email('Invalid email.'),
-  phone: z.string().regex(/^\+?[0-9]{10,15}$/, 'Invalid phone number.'),
+  firstName: z
+    .string()
+    .trim()
+    .min(2, 'Le prénom doit contenir au moins 2 caractères.'),
+  lastName: z
+    .string()
+    .trim()
+    .min(2, 'Le nom doit contenir au moins 2 caractères.'),
+  email: z.string().trim().email("Format d'email invalide."),
+  phone: z
+    .string()
+    .trim()
+    .regex(
+      /^\+?[0-9]{10,15}$/,
+      'Numéro de téléphone invalide (10 à 15 chiffres).',
+    ),
 });
 
 export const UpdateCandidateSchemaZod = CandidateSchemaZod.partial();
+
+export type CreateCandidateDto = z.infer<typeof CandidateSchemaZod>;
+export type UpdateCandidateDto = z.infer<typeof UpdateCandidateSchemaZod>;
+
+export interface CandidateInterface extends CreateCandidateDto {
+  _id: string;
+  isValidated: boolean;
+  deletedAt: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
+}

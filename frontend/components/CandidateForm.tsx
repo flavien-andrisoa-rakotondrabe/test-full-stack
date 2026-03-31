@@ -14,7 +14,7 @@ import { AxiosError } from 'axios';
 const schema = z.object({
   firstName: z.string().min(2, 'Prénom requis'),
   lastName: z.string().min(2, 'Nom requis'),
-  email: z.email('Email invalide'),
+  email: z.string().email('Email invalide'),
   phone: z.string().regex(/^\+?[0-9]{10,15}$/, 'Téléphone invalide.'),
 });
 

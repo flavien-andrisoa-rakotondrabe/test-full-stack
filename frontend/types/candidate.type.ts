@@ -21,6 +21,6 @@ export type CreateCandidateDto = Pick<
 export const CandidateSchemaZod = z.object({
   firstName: z.string().min(2, 'Invalid firstName. Min 2 characters.'),
   lastName: z.string().min(2, 'Invalid lastName. Min 2 characters.'),
-  email: z.email('Invalid email.'),
+  email: z.string().email('Invalid email.'),
   phone: z.string().regex(/^\+?[0-9]{10,15}$/, 'Invalid phone number.'),
 });
