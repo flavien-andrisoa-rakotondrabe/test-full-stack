@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { UserModel } from '@/models/user.model';
 
-const signToken = (id: string) => {
+export const signToken = (id: string) => {
   return jwt.sign({ id }, process.env.JWT_SECRET || 'secret_key', {
     expiresIn: '1d',
   });
