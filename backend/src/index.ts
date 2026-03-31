@@ -17,7 +17,7 @@ import { frontendUri, backendPort } from '@/lib/env';
 import { authGuard } from '@/middlewares/auth.middleware';
 
 dotenv.config();
-const app = express();
+export const app = express();
 
 app.use(
   cors({
@@ -64,7 +64,9 @@ const start = async () => {
   );
 };
 
-start();
+if (process.env.NODE_ENV !== 'test') {
+  start();
+}
 
 const gracefulShutdown = () => {
   server.close(async () => {
@@ -77,5 +79,3 @@ const gracefulShutdown = () => {
 
 process.on('SIGTERM', gracefulShutdown);
 process.on('SIGINT', gracefulShutdown);
-
-export default app;

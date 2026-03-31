@@ -1,12 +1,22 @@
 import request from 'supertest';
-import app from '../src';
+import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import { app } from '../src';
 import { signToken } from '../src/controllers/auth.controller';
 
 describe('Candidates API', () => {
   let token: string;
+  let mongoServer: MongoMemoryServer;
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    mongoServer = await MongoMemoryServer.create();
+    await mongoose.connect(mongoServer.getUri());
     token = signToken('mock-user-id');
+  });
+
+  afterAll(async () => {
+    await mongoose.disconnect();
+    await mongoServer.stop();
   });
 
   it("devrait bloquer l'accès sans token (401)", async () => {

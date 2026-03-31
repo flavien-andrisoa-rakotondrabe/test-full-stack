@@ -1,6 +1,7 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
-import app from '../src';
+
+import { app } from '../src';
 
 describe('Auth API', () => {
   const mockUser = {
