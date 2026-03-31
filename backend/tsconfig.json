@@ -2,7 +2,6 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "nodenext",
-    "types": ["jest", "node"],
     "target": "ES2022",
     "outDir": "dist",
     "rootDir": "src",
@@ -19,5 +18,5 @@
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*", "tests/**/*"]
+  "include": ["src/**/*"]
 }
