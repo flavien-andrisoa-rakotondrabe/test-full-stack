@@ -57,7 +57,7 @@ jobs:
 
       - name: Run Backend Tests (Jest)
         env:
-          MONGO_URI: mongodb://localhost:27017/rh-portal
+          DATABASE_URI: mongodb://localhost:27017/rh-portal
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           PORT: 5000
           NODE_ENV: test
