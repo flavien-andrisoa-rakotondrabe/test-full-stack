@@ -1,0 +1,57 @@
+services:
+  # --- DATABASE ---
+  mongodb:
+    image: mongo:latest
+    container_name: rh-portal-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - rh-network
+
+  # --- BACKEND ---
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rh-portal-api
+    ports:
+      - "5000:5000"
+    environment:
+      path: .env
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongodb
+    networks:
+      - rh-network
+
+  # --- FRONTEND ---
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rh-portal-client
+    ports:
+      - "3000:3000"
+    environment:
+      path: .env
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    depends_on:
+      - backend
+    networks:
+      - rh-network
+
+# --- NETWORKS & VOLUMES ---
+networks:
+  rh-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
