@@ -24,7 +24,7 @@ Ce projet est une plateforme de gestion de candidats développée dans le cadre 
 
 ```
 .
-│.github/
+├── .github/
 │   └── workflows/
 |         └──ci-cd.yaml
 ├── backend/                # API REST Express
@@ -41,7 +41,8 @@ Ce projet est une plateforme de gestion de candidats développée dans le cadre 
 │   │   ├── components/     # Composants atomiques & UI
 │   │   ├── hooks/          # Hooks personnalisés (Logic & API)
 │   │   ├── providers/      # Context Providers (Auth, Query, Toast)
-│   │   └── services/       # Configuration Axios
+│   │   ├── services/       # Configuration Axios
+|   |   └── tests/          # Tests
 ├── docker-compose.yml
 └── README.md
 ```
@@ -50,7 +51,9 @@ Ce projet est une plateforme de gestion de candidats développée dans le cadre 
 
 ## ⚙️ Installation et Lancement
 
-### Prerequis
+### Local
+
+#### Prerequis
 
 - Node.js (v18+)
 - Une instance MongoDB (Locale ou Atlas)
@@ -60,7 +63,7 @@ Ce projet est une plateforme de gestion de candidats développée dans le cadre 
 ```
 git clone https://github.com/flavien-andrisoa-rakotondrabe/test-full-stack.git
 
-cd rh-management-portal
+cd test-full-stack
 ```
 
 2. Configuration du Backend
@@ -74,6 +77,7 @@ npm install
 # DATABASE_URI=mongodb://localhost:27017/rh-portal
 # FRONTEND_URI=http://localhost:3000
 # JWT_SECRET=secret_key
+# NODE_ENV=production
 
 npm run dev
 ```
@@ -86,8 +90,41 @@ npm install
 
 # Créer un fichier .env
 # NEXT_PUBLIC_API_URL=http://localhost:5000
+# NODE_ENV=production
 
 npm run dev
+```
+
+L'application est maintenant accessible sur [http://localhost:3000](http://localhost:3000).
+
+### Utilisant Docker
+
+1. Cloner le projet
+
+```
+git clone https://github.com/flavien-andrisoa-rakotondrabe/test-full-stack.git
+
+cd test-full-stack
+```
+
+2. Configurations
+
+```
+cd backend
+
+# Créer un fichier .env
+# PORT=5000
+# DATABASE_URI=mongodb://mongodb:27017/rh-portal
+# FRONTEND_URI=http://localhost:3000
+# JWT_SECRET=secret_key
+# NODE_ENV=production
+
+cd ../frontend
+
+# Créer un fichier .env
+# NEXT_PUBLIC_API_URL=http://localhost:5000
+# NODE_ENV=production
+
 ```
 
 L'application est maintenant accessible sur [http://localhost:3000](http://localhost:3000).
