@@ -17,7 +17,7 @@ Ce projet est une plateforme de gestion de candidats développée dans le cadre 
 
 - Runtime : Node.js + Express
 - Base de données : MongoDB + Mongoose
-- Sécurité : Argon2 (Hachage), JWT (Authentification), CORS configuré
+- Sécurité : Bcrypt (Hachage), JWT (Authentification), CORS configuré
 - Validation : Zod schemas
 
 ## 🏗 Architecture du Projet
